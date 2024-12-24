@@ -1,0 +1,2223 @@
+
+<?php
+// Including the database connection
+require_once 'connect.php'; 
+
+// Movie data array
+$movies = [
+    [
+        "title" => "The Big Bang Theory",
+        "description" => "A sitcom about nerdy friends navigating life.",
+        "genre" => "Comedy",
+        "release_year" => 2007,
+        "duration" => "20m",
+        "image_url" => "image/TheBigBangTheory.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=WBb3fojgW0Q&ab_channel=vidicsch"
+    ],
+    [
+        "title" => "The Conjuring",
+        "description" => "A chilling horror movie based on true events.",
+        "genre" => "Horror",
+        "release_year" => 2013,
+        "duration" => "1h 52m",
+        "image_url" => "image/TheConjuring.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=PXp_mkoc_s4&ab_channel=TMConceptOfficial"
+    ],
+    [
+        "title" => "The Shawshank Redemption",
+        "description" => "A story of hope and friendship in a prison.",
+        "genre" => "Drama",
+        "release_year" => 1994,
+        "duration" => "2h 22m",
+        "image_url" => "image/ShawshankRedemption.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=PLl99DlL6b4&ab_channel=WarnerBros.Entertainment"
+    ],
+    [
+        "title" => "20 Feet from Stardom",
+        "description" => "A look at the lives of backup singers behind famous performers.",
+        "genre" => "Documentary",
+        "release_year" => 2013,
+        "duration" => "1h 29m",
+        "image_url" => "image\TWENTYFeetFromStardom.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=tWyUJcA8Zfo&ab_channel=RottenTomatoesTrailers"
+    ],
+    [
+        "title" => "A Plastic Ocean",
+        "description" => "A documentary on the devastating effects of plastic pollution.",
+        "genre" => "Documentary",
+        "release_year" => 2016,
+        "duration" => "1h 42m",
+        "image_url" => "image\A PlasticOcean.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=6zrn4-FfbXw&ab_channel=APlasticOcean"
+    ],
+    [
+        "title" => "Aafno",
+        "description" => "A drama exploring family dynamics and societal pressures.",
+        "genre" => "Drama",
+        "release_year" => 2020,
+        "duration" => "2h 5m",
+        "image_url" => "image\Aafno.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=6oEghnv7hpk&ab_channel=OSRDigital"
+    ],
+    [
+        "title" => "Aftermath",
+        "description" => "A thriller about the aftermath of a tragic accident.",
+        "genre" => "Thriller",
+        "release_year" => 2017,
+        "duration" => "1h 34m",
+        "image_url" => "image\Aftermath.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=Mgsv3fETOro&ab_channel=RottenTomatoesTrailers"
+    ],
+    [
+        "title" => "Agatha All Along",
+        "description" => "A delightful and mysterious story of Agatha's adventures.",
+        "genre" => "Mystery",
+        "release_year" => 2024,
+        "duration" => "1 season",
+        "image_url" => "image\Agatha All Along.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=R9pXbNz6Vbw&ab_channel=MarvelEntertainment"
+    ],
+    [
+        "title" => "Agatha",
+        "description" => "A mysterious tale of intrigue and suspense.",
+        "genre" => "Mystery",
+        "release_year" => 2022,
+        "duration" => "2h",
+        "image_url" => "image\Agatha.jpeg",
+        "trailer_url" => "https://www.youtube.com/watch?v=R9pXbNz6Vbw&ab_channel=MarvelEntertainment"
+    ],
+    [
+        "title" => "Allare",
+        "description" => "A heartfelt story about overcoming life’s challenges.",
+        "genre" => "Drama",
+        "release_year" => 2019,
+        "duration" => "1h 50m",
+        "image_url" => "image\Allare.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=MWOlnZSnXJo&ab_channel=NetflixIndia"
+    ],
+    [
+        "title" => "An Inconvenient Truth",
+        "description" => "A documentary on climate change and its global effects.",
+        "genre" => "Documentary",
+        "release_year" => 2006,
+        "duration" => "1h 40m",
+        "image_url" => "image\AnInconvenientTruth.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=Bu6SE5TYrCM&ab_channel=RottenTomatoesClassicTrailers"
+    ],
+
+    [
+        "title" => "Avengers: Endgame",
+        "description" => "The Avengers assemble once more to reverse Thanos' actions and restore balance to the universe.",
+        "genre" => "Action, Adventure, Sci-Fi",
+        "release_year" => 2019,
+        "duration" => "3h 1m",
+        "image_url" => "image\AvengersEndgame.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=BKviRM0KF2A&ab_channel=EntertainmentAccess"
+    ],
+ 
+    [
+        "title" => "A Quiet Place",
+        "description" => "In a post-apocalyptic world, a family is forced to live in silence while hiding from monsters with ultra-sensitive hearing.",
+        "genre" => "Drama, Horror, Sci-Fi",
+        "release_year" => 2018,
+        "duration" => "1h 30m",
+        "image_url" => "image\AQuietPlace.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=WR7cc5t7tv8&ab_channel=ParamountPictures"
+    ],
+    [
+        "title" => "A Real Pain",
+        "description" => "A drama exploring the complexities of human relationships and the pain that often accompanies them.",
+        "genre" => "Drama",
+        "release_year" => 2023,
+        "duration" => "2h 10m",
+        "image_url" => "image\AREALPAIN.jpeg",
+        "trailer_url" => "https://www.youtube.com/watch?v=b2et8Vpu7Ls&ab_channel=SearchlightPictures"
+    ],
+    [
+        "title" => "Avatar",
+        "description" => "A paraplegic Marine is dispatched to the moon Pandora on a unique mission but becomes torn between following orders and protecting an alien civilization.",
+        "genre" => "Action, Adventure, Fantasy",
+        "release_year" => 2009,
+        "duration" => "2h 42m",
+        "image_url" => "image\Avatar.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=d9MyW72ELq0&ab_channel=Avatar"
+    ],
+    [
+        "title" => "Avatar: The Way of Water",
+        "description" => "Jake Sully and Ney'tiri have formed a family and are doing everything to stay together. However, they must leave their home and explore the regions of Pandora when an ancient threat resurfaces.",
+        "genre" => "Action, Adventure, Fantasy",
+        "release_year" => 2022,
+        "duration" => "3h 12m",
+        "image_url" => "image\Avatar2.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=d9MyW72ELq0&ab_channel=Avatar0"
+    ],
+    [
+        "title" => "Basudev",
+        "description" => "A classic Nepali film that delves into the socio-economic issues of Nepalese society through the life of Basudev.",
+        "genre" => "Drama",
+        "release_year" => 1984,
+        "duration" => "2h 15m",
+        "image_url" => "image\Basudev_(film).jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=ZWVz2ZgdqSQ&ab_channel=OSRDigital"
+    ],
+    [
+        "title" => "Before Sunrise",
+        "description" => "A young man and woman meet on a train in Europe and spend one evening together in Vienna. Unfortunately, both know that this will probably be their only night together.",
+        "genre" => "Drama, Romance",
+        "release_year" => 1995,
+        "duration" => "1h 41m",
+        "image_url" => "image\BeforeSunrise.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=6MUcuqbGTxc&t=13s&ab_channel=RottenTomatoesClassicTrailers"
+    ],
+    [
+        "title" => "Before the Flood",
+        "description" => "A documentary presenting a riveting account of the dramatic changes now occurring around the world due to climate change.",
+        "genre" => "Documentary",
+        "release_year" => 2016,
+        "duration" => "1h 36m",
+        "image_url" => "image\BeforeTheFlood.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=zbEnOYtsXHA&ab_channel=elvladyman"
+    ],
+    [
+        "title" => "Bajrangi Bhaijaan",
+        "description" => "An Indian man with a magnanimous heart takes a young mute Pakistani girl back to her homeland to reunite her with her family.",
+        "genre" => "Action, Adventure, Comedy",
+        "release_year" => 2015,
+        "duration" => "2h 43m",
+        "image_url" => "image\BAJRANGI.jpg",
+        "trailer_url" => "hhttps://www.youtube.com/watch?v=7y3KbUHnee8&ab_channel=RGEntertainment"
+    ],
+    [
+        "title" => "Balidaan",
+        "description" => "A Nepali film that portrays the struggle and sacrifices made during the political movements in Nepal.",
+        "genre" => "Drama, History",
+        "release_year" => 1997,
+        "duration" => "2h 10m",
+        "image_url" => "image\Balidaan_(1997_film)_poster.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=Dw0mgoLpkrg&ab_channel=Newstarstv"
+    ],
+    [
+        "title" => "Barbie",
+        "description" => "A doll living in 'Barbieland' is expelled for not being perfect enough and sets off on an adventure in the real world.",
+        "genre" => "Adventure, Comedy, Fantasy",
+        "release_year" => 2023,
+        "duration" => "1h 54m",
+        "image_url" => "image\Barbie.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=pBk4NYhWNMM&ab_channel=WarnerBros.Pictures"
+    ],
+    [
+        "title" => "Casper",
+        "description" => "A friendly ghost named Casper befriends a young girl and helps her family, while dealing with mischievous uncles and a search for treasure in their haunted mansion.",
+        "genre" => "Comedy, Family, Fantasy",
+        "release_year" => 1995,
+        "duration" => "1h 40m",
+        "image_url" => "image\Casper.jpg",
+        "trailer_url" => "https://www.youtube.com/watch?v=1RM2TV4vDUY&ab_channel=FilmTrailerChannel"
+    ],
+    
+        [
+            "title" => "Darpan Chaya",
+            "description" => "A classic Nepali romantic drama.",
+            "genre" => "Drama",
+            "release_year" => 2001,
+            "duration" => "2h 15m",
+            "image_url" => "image\DarpanChaya.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=iwMBR0o3yfg&ab_channel=OSRDigital"
+        ],
+        [
+            "title" => "Dash & Lily",
+            "description" => "A romantic holiday series based on a book.",
+            "genre" => "Romance",
+            "release_year" => 2020,
+            "duration" => "1 season",
+            "image_url" => "image\DashAndLily.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=lpRY4vKvMZs&ab_channel=ONEMediaCoverage"
+        ],
+        [
+            "title" => "David Attenborough: A Life on Our Planet",
+            "description" => "A witness statement from the naturalist.",
+            "genre" => "Documentary",
+            "release_year" => 2020,
+            "duration" => "1h 23m",
+            "image_url" => "image\DavidAttenborough.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=64R2MYUt394&ab_channel=Netflix"
+        ],
+        [
+            "title" => "Deadpool 3",
+            "description" => "The next installment in the hilarious superhero franchise.",
+            "genre" => "Action/Comedy",
+            "release_year" => 2024,
+            "duration" => "TBD",
+            "image_url" => "image\Deadpool3.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=73_1biulkYk&ab_channel=MarvelEntertainment"
+        ],
+        [
+            "title" => "Deuta",
+            "description" => "A classic Nepali drama about family and sacrifice.",
+            "genre" => "Drama",
+            "release_year" => 1991,
+            "duration" => "2h 30m",
+            "image_url" => "image\deuta.jpeg",
+            "trailer_url" => "https://www.youtube.com/watch?v=LfyZ9ajZtfA&ab_channel=HiTechEntertainment"
+        ],
+        [
+            "title" => "Dil Chahta Hai",
+            "description" => "A story about friendship and love.",
+            "genre" => "Drama",
+            "release_year" => 2001,
+            "duration" => "3h 5m",
+            "image_url" => "image\Dil_Chahta_Hai.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=HoDgYV1NzAI&ab_channel=T-SeriesBollywoodClassics"
+        ],
+        [
+            "title" => "Dilwale Dulhania Le Jayenge",
+            "description" => "A Bollywood romantic classic.",
+            "genre" => "Romance",
+            "release_year" => 1995,
+            "duration" => "3h 9m",
+            "image_url" => "image\Dilwale Dulhania Le Jayenge.jpeg",
+            "trailer_url" => "https://www.youtube.com/watch?v=oIZ4U21DRlM&ab_channel=YRF"
+        ],
+        [
+            "title" => "Don’t F*** with Cats",
+            "description" => "A shocking documentary series about an online manhunt.",
+            "genre" => "Documentary",
+            "release_year" => 2019,
+            "duration" => "1 season",
+            "image_url" => "image\Don’tFwithCats.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=x41SMm-9-i4&ab_channel=Netflix"
+        ],
+        [
+            "title" => "Donatello",
+            "description" => "A biopic about the Renaissance sculptor.",
+            "genre" => "Biography",
+            "release_year" => 2023,
+            "duration" => "2h",
+            "image_url" => "image\Donatello.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=LgNEbdFjq_c&ab_channel=NewMastersAcademy"
+        ],
+        [
+            "title" => "Down to Earth with Zac Efron",
+            "description" => "A travel and wellness documentary series.",
+            "genre" => "Documentary",
+            "release_year" => 2020,
+            "duration" => "2 seasons",
+            "image_url" => "image\DownToEarth.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=oMzYiY5wcHU&ab_channel=Netflix"
+        ],
+        [
+            "title" => "Drishyam",
+            "description" => "A gripping story about deception and family.",
+            "genre" => "Thriller",
+            "release_year" => 2015,
+            "duration" => "2h 43m",
+            "image_url" => "image\drishyam.avif",
+            "trailer_url" => "https://www.youtube.com/watch?v=AuuX2j14NBg&ab_channel=Viacom18Studios"
+        ],
+        [
+            "title" => "Chino",
+            "description" => "A famous Nepali action movie.",
+            "genre" => "Action",
+            "release_year" => 1991,
+            "duration" => "2h 30m",
+            "image_url" => "image\Chinofilm.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=etb_lWyUhHI&ab_channel=HDRetroTrailers"
+        ],
+        [
+            "title" => "The Christmas Chronicles 2",
+            "description" => "A magical holiday movie sequel.",
+            "genre" => "Family",
+            "release_year" => 2020,
+            "duration" => "1h 55m",
+            "image_url" => "image\ChristmasChronicles2.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=HVzBwSOcBaI&ab_channel=Netflix"
+        ],
+        [
+            "title" => "Citizen Kane",
+            "description" => "A cinematic masterpiece about a media tycoon.",
+            "genre" => "Drama",
+            "release_year" => 1941,
+            "duration" => "1h 59m",
+            "image_url" => "image\CitizenKane.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=2HY35DNYt8g&ab_channel=AmericanFilmInstitute"
+        ],
+        [
+            "title" => "Cleopatra",
+            "description" => "An epic historical drama about the Egyptian queen.",
+            "genre" => "Historical",
+            "release_year" => 1963,
+            "duration" => "4h 8m",
+            "image_url" => "image\Cleopatra.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=IktHcPyNlv4&ab_channel=Netflix"
+        ],
+        [
+            "title" => "Cloudy with a Chance of Meatballs",
+            "description" => "An animated comedy about food falling from the sky.",
+            "genre" => "Animation",
+            "release_year" => 2009,
+            "duration" => "1h 30m",
+            "image_url" => "image\CloudyWithAChanceOfMeatballs.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=pUaKcFI4BZY&ab_channel=SonyPicturesEntertainment"
+        ],
+        [
+            "title" => "The Blue Planet",
+            "description" => "A documentary series about the natural history of the world's oceans.",
+            "genre" => "Documentary",
+            "release_year" => 2001,
+            "duration" => "8 episodes",
+            "image_url" => "image/TheBluePlanet.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=kAphgHhlteM&ab_channel=BBCEarth"
+        ],
+        [
+            "title" => "The Cove",
+            "description" => "A documentary that analyzes and questions dolphin hunting practices in Japan.",
+            "genre" => "Documentary",
+            "release_year" => 2009,
+            "duration" => "1h 32m",
+            "image_url" => "image/the-cove.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=jHaLJOYqvUQ&ab_channel=RottenTomatoesClassicTrailers"
+        ],
+        [
+            "title" => "The Crown",
+            "description" => "A drama about the reign of Queen Elizabeth II.",
+            "genre" => "Drama",
+            "release_year" => 2016,
+            "duration" => "6 seasons",
+            "image_url" => "image/TheCrown.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=JWtnJjn6ng0&ab_channel=Netflix"
+        ],
+        [
+            "title" => "The Dark Knight",
+            "description" => "Batman faces the Joker in this thrilling superhero film.",
+            "genre" => "Action",
+            "release_year" => 2008,
+            "duration" => "2h 32m",
+            "image_url" => "image/TheDarkKnight.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=EXeTwQWrcwY&t=31s&ab_channel=RottenTomatoesClassicTrailers"
+        ],
+        [
+            "title" => "The Disappearance Of Madeline McCann",
+            "description" => "A documentary series exploring the disappearance of a young girl.",
+            "genre" => "Documentary",
+            "release_year" => 2019,
+            "duration" => "8 episodes",
+            "image_url" => "image/TheDisappearanceOfMadelineMcCann.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=tBnarCTOiCY&ab_channel=Netflix"
+        ],
+        [
+            "title" => "The Fog Of War",
+            "description" => "A documentary about the complexities of war.",
+            "genre" => "Documentary",
+            "release_year" => 2003,
+            "duration" => "1h 47m",
+            "image_url" => "image/TheFogOfWar.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=k_O7bD8Swxk&ab_channel=KloklineCinema"
+        ],
+        [
+            "title" => "The Fresh Prince",
+            "description" => "A sitcom about a street-smart kid moving to a wealthy neighborhood.",
+            "genre" => "Comedy",
+            "release_year" => 1990,
+            "duration" => "6 seasons",
+            "image_url" => "image/TheFreshPrince.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=kD3ISIM_kU8&ab_channel=BlockbusterGLOBAL"
+        ],
+        [
+            "title" => "The Godfather",
+            "description" => "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
+            "genre" => "Crime, Drama",
+            "release_year" => 1972,
+            "duration" => "2h 55m",
+            "image_url" => "image/TheGodfather.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=UaVTIH8mujA&ab_channel=ParamountPictures"
+        ],
+        [
+            "title" => "The Godfather Part II",
+            "description" => "The early life and career of Vito Corleone in 1920s New York is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+            "genre" => "Crime, Drama",
+            "release_year" => 1974,
+            "duration" => "3h 22m",
+            "image_url" => "image/TheGodfatherPartII.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=9O1Iy9od7-A&ab_channel=ParamountMovies"
+        ],
+        [
+            "title" => "The Good Doctor Holiday",
+            "description" => "A special holiday episode of The Good Doctor.",
+            "genre" => "Drama",
+            "release_year" => 2021,
+            "duration" => "45m",
+            "image_url" => "image/TheGoodDoctorHoliday.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=lnY9FWUTY84&ab_channel=SonyPicturesEntertainment"
+        ],
+        [
+            "title" => "The Great Hack",
+            "description" => "A documentary that uncovers the dark world of data exploitation.",
+            "genre" => "Documentary",
+            "release_year" => 2019,
+            "duration" => "1h 54m",
+            "image_url" => "image/TheGreatHack.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=iX8GxLP1FHo&ab_channel=Netflix"
+        ],
+        [
+            "title" => "The Holiday",
+            "description" => "Two women swap homes for the holidays and find love.",
+            "genre" => "Romance, Comedy",
+            "release_year" => 2006,
+            "duration" => "2h 16m",
+            "image_url" => "image/TheHoliday.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=wk9caHO3pW0&ab_channel=SonyPicturesEntertainment"
+        ],
+        [
+            "title" => "The Jinx",
+            "description" => "A documentary series investigating the unsolved crimes of real estate heir Robert Durst.",
+            "genre" => "Documentary",
+            "release_year" => 2015,
+            "duration" => "6 episodes",
+            "image_url" => "image/TheJinx.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=8ZabDYB7ijM&ab_channel=HBOUK"
+        ],
+        [
+            "title" => "The Keepers",
+            "description" => "A documentary series exploring the unsolved murder of a nun and the cover-up of sexual abuse.",
+            "genre" => "Documentary",
+            "release_year" => 2017,
+            "duration" => "7 episodes",
+            "image_url" => "image/TheKeepers.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=Khr7dbuBjuE&ab_channel=Netflix"
+        ],
+        [
+            "title" => "The Last Dance",
+            "description" => "A documentary series about Michael Jordan's final season with the Chicago Bulls.",
+            "genre" => "Documentary",
+            "release_year" => 2020,
+            "duration" => "10 episodes",
+            "image_url" => "image/TheLastDance.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=qxM1kDmF_eE&ab_channel=GSCinemas"
+        ],
+        [
+            "title" => "The Last Lion",
+            "description" => "A documentary about the life of a lion.",
+            "genre" => "Documentary",
+            "release_year" => 2011,
+            "duration" => "1h 28m",
+            "image_url" => "image/TheLastLion.jpg",
+            "trailer_url" => "https://www.youtube.com/watch?v=GbSiJ4cVVL4&ab_channel=xfile"
+        ],
+[
+    "title" => "The Blue Planet",
+    "description" => "A documentary series about the natural history of the world's oceans.",
+    "genre" => "Documentary",
+    "release_year" => 2001,
+    "duration" => "8 episodes",
+    "image_url" => "image/TheBluePlanet.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=EF8C4v7JIbA&ab_channel=BBCEarth"
+],
+[
+    "title" => "The Cove",
+    "description" => "A documentary that analyzes and questions dolphin hunting practices in Japan.",
+    "genre" => "Documentary",
+    "release_year" => 2009,
+    "duration" => "1h 32m",
+    "image_url" => "image/the-cove.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=4bJfFGyhgHY&ab_channel=CharlesHambleton"
+],
+
+[
+    "title" => "The Dark Knight",
+    "description" => "Batman faces the Joker in this thrilling superhero film.",
+    "genre" => "Action",
+    "release_year" => 2008,
+    "duration" => "2h 32m",
+    "image_url" => "image/TheDarkKnight.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=EXeTwQWrcwY"
+],
+[
+    "title" => "The Disappearance Of Madeline McCann",
+    "description" => "A documentary series exploring the disappearance of a young girl.",
+    "genre" => "Documentary",
+    "release_year" => 2019,
+    "duration" => "8 episodes",
+    "image_url" => "image/TheDisappearanceOfMadelineMcCann.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ACoaHqYxjxw&ab_channel=VULDAR"
+],
+[
+    "title" => "The Fog Of War",
+    "description" => "A documentary about the complexities of war.",
+    "genre" => "Documentary",
+    "release_year" => 2003,
+    "duration" => "1h 47m",
+    "image_url" => "image/TheFogOfWar.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=k_O7bD8Swxk&ab_channel=KloklineCinema"
+],
+[
+    "title" => "The Fresh Prince",
+    "description" => "A sitcom about a street-smart kid moving to a wealthy neighborhood.",
+    "genre" => "Comedy",
+    "release_year" => 1990,
+    "duration" => "6 seasons",
+    "image_url" => "image/TheFreshPrince.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=rQ1uG91Bbls&ab_channel=WillSmith"
+],
+[
+    "title" => "The Godfather",
+    "description" => "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
+    "genre" => "Crime, Drama",
+    "release_year" => 1972,
+    "duration" => "2h 55m",
+    "image_url" => "image/TheGodfather.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=UaVTIH8mujA&ab_channel=ParamountPictures"
+],
+[
+    "title" => "The Godfather Part II",
+    "description" => "The early life and career of Vito Corleone in 1920s New York is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
+    "genre" => "Crime, Drama",
+    "release_year" => 1974,
+    "duration" => "3h 22m",
+    "image_url" => "image/TheGodfatherPartII.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=5DO7YbP6S4Q"
+],
+[
+    "title" => "The Good Doctor Holiday",
+    "description" => "A special holiday episode of The Good Doctor.",
+    "genre" => "Drama",
+    "release_year" => 2021,
+    "duration" => "45m",
+    "image_url" => "image/TheGoodDoctorHoliday.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=lnY9FWUTY84&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "The Great Hack",
+    "description" => "A documentary that uncovers the dark world of data exploitation.",
+    "genre" => "Documentary",
+    "release_year" => 2019,
+    "duration" => "1h 54m",
+    "image_url" => "image/TheGreatHack.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=iX8GxLP1FHo&ab_channel=Netflix"
+],
+[
+    "title" => "The Holiday",
+    "description" => "Two women swap homes for the holidays and find love.",
+    "genre" => "Romance, Comedy",
+    "release_year" => 2006,
+    "duration" => "2h 16m",
+    "image_url" => "image/TheHoliday.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=wk9caHO3pW0&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "The Jinx",
+    "description" => "A documentary series investigating the unsolved crimes of real estate heir Robert Durst.",
+    "genre" => "Documentary",
+    "release_year" => 2015,
+    "duration" => "6 episodes",
+    "image_url" => "image/TheJinx.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=8ZabDYB7ijM&ab_channel=HBOUK"
+],
+[
+    "title" => "The Keepers",
+    "description" => "A documentary series exploring the unsolved murder of a nun and the cover-up of sexual abuse.",
+    "genre" => "Documentary",
+    "release_year" => 2017,
+    "duration" => "7 episodes",
+    "image_url" => "image/TheKeepers.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Khr7dbuBjuE&ab_channel=Netflix"
+],
+[
+    "title" => "The Last Dance",
+    "description" => "A documentary series about Michael Jordan's final season with the Chicago Bulls.",
+    "genre" => "Documentary",
+    "release_year" => 2020,
+    "duration" => "10 episodes",
+    "image_url" => "image/TheLastDance.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=qxM1kDmF_eE&ab_channel=GSCinemas"
+],
+[
+    "title" => "The Last Lion",
+    "description" => "A documentary about the life of a lion.",
+    "genre" => "Documentary",
+    "release_year" => 2011,
+    "duration" => "1h 28m",
+    "image_url" => "image/TheLastLion.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=GbSiJ4cVVL4&ab_channel=xfile"
+],
+[
+    "title" => "The Mandalorian",
+    "description" => "A lone gunfighter makes his way through the outer reaches of the galaxy.",
+    "genre" => "Action, Adventure, Fantasy",
+    "release_year" => 2019,
+    "duration" => "3 seasons",
+    "image_url" => "image/TheMandalorian.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=aOC8E8z_ifw&ab_channel=StarWars"
+],
+[
+    "title" => "The Marvels",
+    "description" => "Captain Marvel teams up with Ms. Marvel and Monica Rambeau.",
+    "genre" => "Action, Adventure, Sci-Fi",
+    "release_year" => 2023,
+    "duration" => "2h 30m",
+    "image_url" => "image/TheMarvels.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=wS_qbDztgVY&ab_channel=MarvelEntertainment"
+],
+[
+    "title" => "The Matrix",
+    "description" => "A computer hacker learns about the true nature of his reality.",
+    "genre" => "Action, Sci-Fi",
+    "release_year" => 1999,
+    "duration" => "2h 16m",
+    "image_url" => "image/TheMatrix.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=9ix7TUGVYIo&ab_channel=WarnerBros.Pictures"
+],
+[
+    "title" => "The Most Unknown",
+    "description" => "A documentary that explores some of the toughest questions in science.",
+    "genre" => "Documentary",
+    "release_year" => 2018,
+    "duration" => "1h 32m",
+    "image_url" => "image/TheMostUnknown.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=htk30zpNalM&ab_channel=Motherboard"
+],
+[
+    "title" => "The Office US",
+    "description" => "A mockumentary on a group of typical office workers.",
+    "genre" => "Comedy",
+    "release_year" => 2005,
+    "duration" => "9 seasons",
+    "image_url" => "image/TheOfficeUS.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=-C2z-nshFts&ab_channel=NBCUniversal"
+],
+[
+    "title" => "The Polar Express",
+    "description" => "A young boy embarks on a magical adventure to the North Pole on the Polar Express.",
+    "genre" => "Animation, Adventure, Comedy",
+    "release_year" => 2004,
+    "duration" => "1h 40m",
+    "image_url" => "image/ThePolarExpress.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=NWS1dwrl2Lc&ab_channel=WarnerBros.Entertainment"
+],
+[
+    "title" => "The Princess Switch",
+    "description" => "When a down-to-earth Chicago baker and a soon-to-be princess discover they look like twins, they hatch a Christmastime plan to trade places.",
+    "genre" => "Comedy, Drama, Family",
+    "release_year" => 2018,
+    "duration" => "1h 41m",
+    "image_url" => "image/ThePrincessSwitch.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=WwMcynLe1Xs&ab_channel=StillWatchingNetflix"
+],
+[
+    "title" => "The Shining",
+    "description" => "A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence.",
+    "genre" => "Drama, Horror",
+    "release_year" => 1980,
+    "duration" => "2h 26m",
+    "image_url" => "image/TheShining.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=S014oGZiSdI&ab_channel=StanleyKubrick"
+],
+[
+    "title" => "The Simpsons",
+    "description" => "The satiric adventures of a working-class family in the misfit city of Springfield.",
+    "genre" => "Animation, Comedy",
+    "release_year" => 1989,
+    "duration" => "32 seasons",
+    "image_url" => "image/TheSimpsons.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=XPG0MqIcby8&ab_channel=20thCenturyStudios"
+],
+[
+    "title" => "The Sixth Sense",
+    "description" => "A boy who communicates with spirits seeks the help of a disheartened child psychologist.",
+    "genre" => "Drama, Mystery, Thriller",
+    "release_year" => 1999,
+    "duration" => "1h 47m",
+    "image_url" => "image/TheSixthSense.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=3-ZP95NF_Wk&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "The Social Dilemma",
+    "description" => "Explores the dangerous human impact of social networking.",
+    "genre" => "Documentary, Drama",
+    "release_year" => 2020,
+    "duration" => "1h 34m",
+    "image_url" => "image/TheSocialDilemma.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=uaaC57tcci0&t=28s&ab_channel=Netflix"
+],
+[
+    "title" => "The Sopranos",
+    "description" => "New Jersey mob boss Tony Soprano deals with personal and professional issues in his home and business life.",
+    "genre" => "Crime, Drama",
+    "release_year" => 1999,
+    "duration" => "6 seasons",
+    "image_url" => "image/TheSopranos.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=KMx4iFcozK0&ab_channel=WorldofTrailers"
+],
+[
+    "title" => "The True Cost",
+    "description" => "A documentary exploring the impact of fashion on people and the planet.",
+    "genre" => "Documentary",
+    "release_year" => 2015,
+    "duration" => "1h 32m",
+    "image_url" => "image/TheTrueCost.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=rwp0Bx0awoE&ab_channel=LifeIsMyMovieEntertainmentl"
+],
+[
+    "title" => "The Velvet Underground",
+    "description" => "A documentary film about the iconic rock band.",
+    "genre" => "Documentary, Music",
+    "release_year" => 2021,
+    "duration" => "2h",
+    "image_url" => "image/TheVelvetUnderground.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=5CUOThpjMuc&t=202s&ab_channel=Grunge"
+],
+[
+    "title" => "The Witcher",
+    "description" => "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world.",
+    "genre" => "Action, Adventure, Drama",
+    "release_year" => 2019,
+    "duration" => "2 seasons",
+    "image_url" => "image/TheWitcher.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ndl1W4ltcmg&t=3s&ab_channel=Netflix"
+],
+[
+    "title" => "The X-Files",
+    "description" => "Two FBI agents, Fox Mulder and Dana Scully, investigate the strange and unexplained while hidden forces work to impede their efforts.",
+    "genre" => "Crime, Drama, Mystery",
+    "release_year" => 1993,
+    "duration" => "11 seasons",
+    "image_url" => "image/TheXFiles.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=KKziOmsJxzE&ab_channel=TVPromos"
+],
+[
+    "title" => "Three Idiots",
+    "description" => "Two friends are searching for their long lost companion.",
+    "genre" => "Comedy, Drama",
+    "release_year" => 2009,
+    "duration" => "2h 50m",
+    "image_url" => "image/ThreeIdiots.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=K0eDlFX9GMc&ab_channel=moviemaniacsDE"
+],
+[
+    "title" => "Train to Busan",
+    "description" => "While a zombie virus breaks out in South Korea, passengers struggle to survive on the train from Seoul to Busan.",
+    "genre" => "Action, Horror, Thriller",
+    "release_year" => 2016,
+    "duration" => "1h 58m",
+    "image_url" => "image/TrainToBusan.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=1ovgxN2VWNc&ab_channel=RottenTomatoesIndie"
+],
+[
+    "title" => "Tron",
+    "description" => "A computer hacker is abducted into the digital world and forced to participate in gladiatorial games.",
+    "genre" => "Action, Adventure, Sci-Fi",
+    "release_year" => 1982,
+    "duration" => "1h 36m",
+    "image_url" => "image/Tron.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=P78pl1FUXfA&ab_channel=DisneyUK"
+],
+[
+    "title" => "Umbrella Academy",
+    "description" => "A family of former child heroes, now grown apart, must reunite to continue to protect the world.",
+    "genre" => "Action, Adventure, Comedy",
+    "release_year" => 2019,
+    "duration" => "2 seasons",
+    "image_url" => "image/UmbrellaAcademy.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Us",
+    "description" => "A family's serene beach vacation turns to chaos when their doppelgängers appear and begin to terrorize them.",
+    "genre" => "Horror, Thriller",
+    "release_year" => 2019,
+    "duration" => "1h 56m",
+    "image_url" => "image/Us.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Watermark",
+    "description" => "A documentary that brings together diverse stories from around the globe about our relationship with water.",
+    "genre" => "Documentary",
+    "release_year" => 2013,
+    "duration" => "1h 32m",
+    "image_url" => "image/Watermark.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=5Yvu7-iP7gY&ab_channel=FilmIsNowMovies"
+],
+[
+    "title" => "We Are Legion",
+    "description" => "A documentary that takes us inside the world of Anonymous.",
+    "genre" => "Documentary",
+    "release_year" => 2012,
+    "duration" => "1h 33m",
+    "image_url" => "image/WeAreLegion.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ynAdzOjIScg&ab_channel=TrailersPlaygroundHD"
+],
+
+[
+    "title" => "Wednesday",
+    "description" => "Wednesday Addams attempts to master her emerging psychic ability.",
+    "genre" => "Comedy, Crime, Family",
+    "release_year" => 2022,
+    "duration" => "1 season",
+    "image_url" => "image/Wednesday.jpg",
+    "trailer_url"=> "https://www.youtube.com/watch?v=Di310WS8zLk&ab_channel=Netflix"
+],
+
+[
+    "title" => "The Civil War",
+    "description" => "A documentary film about the American Civil War.",
+    "genre" => "Documentary",
+    "release_year" => 1990,
+    "duration" => "9 episodes",
+    "image_url" => "image/TheCivilWar.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=aDyQxtg0V2w"
+],
+[
+    "title" => "The Lion King",
+    "description" => "A young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery.",
+    "genre" => "Animation, Adventure, Drama",
+    "release_year" => 1994,
+    "duration" => "1h 28m",
+    "image_url" => "image/TheLionKing.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=o17MF9vnabg&ab_channel=Disney"
+],
+[
+    "title" => "The Social Dilemma 1",
+    "description" => "Explores the dangerous human impact of social networking.",
+    "genre" => "Documentary, Drama",
+    "release_year" => 2020,
+    "duration" => "1h 34m",
+    "image_url" => "image/TheSocialDilemma1.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=uaaC57tcci0&ab_channel=Netflix"
+],
+[
+    "title" => "When We Were Kings",
+    "description" => "A documentary about the famous 'Rumble in the Jungle' boxing match between Muhammad Ali and George Foreman.",
+    "genre" => "Documentary, Sport",
+    "release_year" => 1996,
+    "duration" => "1h 29m",
+    "image_url" => "image/WhenWeWereKings.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=pqRP_5H5jmU&ab_channel=MadmanFilms"
+],
+[
+    "title" => "White Lotus S2",
+    "description" => "A social satire series set in a tropical resort, where various guests and employees experience their own turmoil.",
+    "genre" => "Comedy, Drama",
+    "release_year" => 2021,
+    "duration" => "2 seasons",
+    "image_url" => "image/WhiteLotusS2.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Baflc_0XVfY&ab_channel=HBO"
+],
+[
+    "title" => "Wicked",
+    "description" => "The story of how a green-skinned woman framed by the Wizard of Oz becomes the Wicked Witch of the West.",
+    "genre" => "Musical, Fantasy",
+    "release_year" => 2024,
+    "duration" => "TBD",
+    "image_url" => "image/Wicked.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=6COmYeLsz4c&t=2s&ab_channel=UniversalPictures"
+],
+[
+    "title" => "Wild Wild Country",
+    "description" => "A documentary series about a controversial cult leader who builds a utopian city in the Oregon desert.",
+    "genre" => "Documentary, Crime",
+    "release_year" => 2018,
+    "duration" => "1 season",
+    "image_url" => "image/WildWildCountry.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=hBLS_OM6Puk&ab_channel=Netflix"
+],
+[
+    "title" => "Won't You Be My Neighbor?",
+    "description" => "A documentary about the life and legacy of Fred Rogers, the beloved host of the popular children's TV show Mister Rogers' Neighborhood.",
+    "genre" => "Documentary, Biography",
+    "release_year" => 2018,
+    "duration" => "1h 34m",
+    "image_url" => "image/wont-you-be-my-neighbor.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=FhwktRDG_aQ&ab_channel=FocusFeatures"
+],
+[
+    "title" => "You've Got Mail",
+    "description" => "Two business rivals who despise each other in real life unwittingly fall in love over the Internet.",
+    "genre" => "Comedy, Drama, Romance",
+    "release_year" => 1998,
+    "duration" => "1h 59m",
+    "image_url" => "image/YouveGotMail.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=bjP4s7UUnK8&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Zindagi Na Milegi Dobara",
+    "description" => "Three friends decide to turn their fantasy vacation into reality after one of their number becomes engaged.",
+    "genre" => "Comedy, Drama",
+    "release_year" => 2011,
+    "duration" => "2h 35m",
+    "image_url" => "image/Zindagi_Na_Milegi_Dobara.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=FJrpcDgC3zU&ab_channel=ErosNowMoviesPreview"
+],
+
+[
+    "title" => "AlphaGo",
+    "description" => "A documentary about the AI program AlphaGo.",
+    "genre" => "Documentary",
+    "release_year" => 2017,
+    "duration" => "1h 30m",
+    "image_url" => "image/AlphaGo.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=8tq1C8spV_g&ab_channel=AlphaGoMovie"
+],
+[
+    "title" => "Annabelle",
+    "description" => "A couple begins to experience terrifying supernatural occurrences involving a vintage doll shortly after their home is invaded by satanic cultists.",
+    "genre" => "Horror, Mystery, Thriller",
+    "release_year" => 2014,
+    "duration" => "1h 39m",
+    "image_url" => "image/Annabelle.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Anvil: The Story of Anvil",
+    "description" => "A documentary about the Canadian heavy metal band Anvil.",
+    "genre" => "Documentary, Music",
+    "release_year" => 2008,
+    "duration" => "1h 20m",
+    "image_url" => "image/AnvilTheStoryOfAnvil.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "AREALPAIN",
+    "description" => "A drama exploring the complexities of human relationships and the pain that often accompanies them.",
+    "genre" => "Drama",
+    "release_year" => 2023,
+    "duration" => "2h 10m",
+    "image_url" => "image/AREALPAIN.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Back",
+    "description" => "A comedy series about a man who takes over the family business after his father's death.",
+    "genre" => "Comedy",
+    "release_year" => 2017,
+    "duration" => "2 seasons",
+    "image_url" => "image/Back.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Best Christmas Ever",
+    "description" => "A holiday movie about the magic of Christmas.",
+    "genre" => "Family",
+    "release_year" => 2020,
+    "duration" => "1h 30m",
+    "image_url" => "image/BestChristmasEver.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Blackfish",
+    "description" => "A documentary that explores the controversial captivity of killer whales.",
+    "genre" => "Documentary",
+    "release_year" => 2013,
+    "duration" => "1h 23m",
+    "image_url" => "image/Blackfish.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Black Mirror",
+    "description" => "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.",
+    "genre" => "Drama, Sci-Fi, Thriller",
+    "release_year" => 2011,
+    "duration" => "5 seasons",
+    "image_url" => "image/BlackMirror.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Blitz",
+    "description" => "A tough cop is dispatched to take down a serial killer who has been targeting police officers.",
+    "genre" => "Action, Crime, Thriller",
+    "release_year" => 2011,
+    "duration" => "1h 37m",
+    "image_url" => "image/Blitz.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Breaking Bad",
+    "description" => "A high school chemistry teacher turned methamphetamine producer partners with a former student to secure his family's future.",
+    "genre" => "Crime, Drama, Thriller",
+    "release_year" => 2008,
+    "duration" => "5 seasons",
+    "image_url" => "image/BreakingBad.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Bridgerton S2",
+    "description" => "A drama series about the wealthy Bridgerton family and their romantic entanglements.",
+    "genre" => "Drama, Romance",
+    "release_year" => 2020,
+    "duration" => "2 seasons",
+    "image_url" => "image/BridgertonS2.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Buffy the Vampire Slayer",
+    "description" => "A young woman, destined to slay vampires, demons and other infernal creatures, deals with her life fighting evil, with the help of her friends.",
+    "genre" => "Action, Drama, Fantasy",
+    "release_year" => 1997,
+    "duration" => "7 seasons",
+    "image_url" => "image/BuffyTheVampireSlayer.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Chasing Ice",
+    "description" => "A documentary that chronicles the efforts of environmental photographer James Balog to capture the world's changing glaciers.",
+    "genre" => "Documentary",
+    "release_year" => 2012,
+    "duration" => "1h 15m",
+    "image_url" => "image/ChasingIce.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Chat",
+    "description" => "A documentary about the impact of online chat rooms on society.",
+    "genre" => "Documentary",
+    "release_year" => 2021,
+    "duration" => "1h 30m",
+    "image_url" => "image/Chat.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Chor",
+    "description" => "A drama about a thief and his journey through life.",
+    "genre" => "Drama",
+    "release_year" => 2021,
+    "duration" => "2h",
+    "image_url" => "image/Chor.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Codebreaker",
+    "description" => "The story of Alan Turing, the British mathematician who broke the German Enigma code during World War II.",
+    "genre" => "Biography, Drama, History",
+    "release_year" => 2011,
+    "duration" => "1h 21m",
+    "image_url" => "image/Codebreaker.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Concrete",
+    "description" => "A documentary exploring the impact of concrete on the world.",
+    "genre" => "Documentary",
+    "release_year" => 2023,
+    "duration" => "1h 30m",
+    "image_url" => "image/Concrete.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Conversations with a Hitman",
+    "description" => "A documentary exploring the life of a hitman.",
+    "genre" => "Documentary, Crime",
+    "release_year" => 2022,
+    "duration" => "1h 30m",
+    "image_url" => "image/ConversationsWithAHitman.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Crime Scene",
+    "description" => "A documentary series exploring various crime scenes and the investigations that followed.",
+    "genre" => "Documentary, Crime",
+    "release_year" => 2021,
+    "duration" => "2 seasons",
+    "image_url" => "image/CrimeScene.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Cruella",
+    "description" => "A live-action prequel feature film following a young Cruella de Vil.",
+    "genre" => "Comedy, Crime",
+    "release_year" => 2021,
+    "duration" => "2h 14m",
+    "image_url" => "image/Cruella.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Dangal",
+    "description" => "Former wrestler Mahavir Singh Phogat and his two wrestler daughters struggle towards glory at the Commonwealth Games in the face of societal oppression.",
+    "genre" => "Action, Biography, Drama",
+    "release_year" => 2016,
+    "duration" => "2h 41m",
+    "image_url" => "image/DANGAL.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Dark",
+    "description" => "A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes the relationships among four families.",
+    "genre" => "Crime, Drama, Mystery",
+    "release_year" => 2017,
+    "duration" => "3 seasons",
+    "image_url" => "image/Dark.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Dune: Part Two",
+    "description" => "The second part of the Dune saga, continuing the story of Paul Atreides.",
+    "genre" => "Adventure, Drama, Sci-Fi",
+    "release_year" => 2024,
+    "duration" => "TBD",
+    "image_url" => "image/DunePartTwo.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Dune Prophecy",
+    "description" => "A documentary exploring the world and lore of Dune.",
+    "genre" => "Documentary",
+    "release_year" => 2023,
+    "duration" => "1h 30m",
+    "image_url" => "image/DuneProphecy.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Empire Strikes Back",
+    "description" => "After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader.",
+    "genre" => "Action, Adventure, Fantasy",
+    "release_year" => 1980,
+    "duration" => "2h 4m",
+    "image_url" => "image/EmpireStrikesBack.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "EMS",
+    "description" => "A drama exploring the lives of emergency medical services personnel.",
+    "genre" => "Drama",
+    "release_year" => 2021,
+    "duration" => "1h 40m",
+    "image_url" => "image/EMS.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "ER",
+    "description" => "The lives, loves and losses of the doctors and nurses of Chicago's County General Hospital.",
+    "genre" => "Drama, Romance",
+    "release_year" => 1994,
+    "duration" => "15 seasons",
+    "image_url" => "image/ER.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer_url"
+],
+[
+    "title" => "Exit Through the Gift Shop",
+    "description" => "A documentary that tells the story of Thierry Guetta, a French immigrant in Los Angeles, and his obsession with street art.",
+    "genre" => "Documentary",
+    "release_year" => 2010,
+    "duration" => "1h 27m",
+    "image_url" => "image/ExitThroughTheGiftShop.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=oHJBdDSTbLw&ab_channel=watchCulturetainment"
+],
+[
+    "title" => "Fantastic Four (2024)",
+    "description" => "The upcoming Marvel superhero movie about the iconic team of four with extraordinary abilities.",
+    "genre" => "Superhero, Action, Sci-Fi",
+    "release_year" => 2024,
+    "duration" => "TBD",
+    "image_url" => "image/FantasticFour2024.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Fight Club",
+    "description" => "A disillusioned man forms an underground fight club with a soap salesman, which evolves into something far bigger.",
+    "genre" => "Drama, Thriller",
+    "release_year" => 1999,
+    "duration" => "2h 19m",
+    "image_url" => "image/FightClub.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Finding Neverland",
+    "description" => "The story of J.M. Barrie's friendship with a family who inspired him to create Peter Pan.",
+    "genre" => "Biography, Drama, Family",
+    "release_year" => 2004,
+    "duration" => "1h 46m",
+    "image_url" => "image/FindingNeverland.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Fire of Love",
+    "description" => "A documentary about the lives and work of volcanologists Katia and Maurice Krafft.",
+    "genre" => "Documentary, Biography",
+    "release_year" => 2022,
+    "duration" => "1h 33m",
+    "image_url" => "image/FireOfLove.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Flee",
+    "description" => "An animated documentary about a man revealing his past as a child refugee from Afghanistan.",
+    "genre" => "Documentary, Animation",
+    "release_year" => 2021,
+    "duration" => "1h 29m",
+    "image_url" => "image/Flee.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Flipped",
+    "description" => "A coming-of-age romantic comedy about two eighth-graders who find themselves attracted to each other.",
+    "genre" => "Romance, Comedy, Drama",
+    "release_year" => 2010,
+    "duration" => "1h 30m",
+    "image_url" => "image/Flipped.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Forrest Gump",
+    "description" => "The life journey of a simple man with a big heart, experiencing significant historical moments.",
+    "genre" => "Drama, Romance",
+    "release_year" => 1994,
+    "duration" => "2h 22m",
+    "image_url" => "image/ForrestGump.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Free Solo",
+    "description" => "A stunning documentary about Alex Honnold's quest to free solo climb El Capitan.",
+    "genre" => "Documentary, Adventure",
+    "release_year" => 2018,
+    "duration" => "1h 40m",
+    "image_url" => "image/FreeSolo.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Freeway Empire",
+    "description" => "A gripping drama about the life of a notorious criminal mastermind.",
+    "genre" => "Crime, Drama",
+    "release_year" => 2020,
+    "duration" => "1h 50m",
+    "image_url" => "image/FreewayEmpire.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Friends",
+    "description" => "The iconic sitcom following the lives and friendships of six individuals in New York City.",
+    "genre" => "Comedy, Romance",
+    "release_year" => 1994,
+    "duration" => "10 seasons",
+    "image_url" => "image/Friends.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Furiosa",
+    "description" => "A prequel to Mad Max: Fury Road focusing on Furiosa's origins.",
+    "genre" => "Action, Adventure",
+    "release_year" => 2024,
+    "duration" => "TBD",
+    "image_url" => "image/Furiosa.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Game of Thrones",
+    "description" => "An epic fantasy series exploring the power struggles between noble families in the land of Westeros.",
+    "genre" => "Fantasy, Drama",
+    "release_year" => 2011,
+    "duration" => "8 seasons",
+    "image_url" => "image/Game_of_Thrones.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "General Magic",
+    "description" => "A documentary about a tech company that was ahead of its time in creating the first smartphone.",
+    "genre" => "Documentary, History",
+    "release_year" => 2018,
+    "duration" => "1h 33m",
+    "image_url" => "image/GeneralMagic.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Get Out",
+    "description" => "A psychological thriller about a young Black man uncovering disturbing secrets while visiting his white girlfriend's family.",
+    "genre" => "Horror, Thriller",
+    "release_year" => 2017,
+    "duration" => "1h 44m",
+    "image_url" => "image/GetOut.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Gladiator",
+    "description" => "A Roman general seeks revenge against the emperor who betrayed him, fighting as a gladiator in the arena.",
+    "genre" => "Action, Drama",
+    "release_year" => 2000,
+    "duration" => "2h 35m",
+    "image_url" => "image/Gladiator.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Good Girls Guide",
+    "description" => "A heartwarming and comedic exploration of life, relationships, and friendships.",
+    "genre" => "Comedy, Drama",
+    "release_year" => 2023,
+    "duration" => "TBD",
+    "image_url" => "image/GoodGirlsGuide.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Guardians of the Galaxy Vol. 3",
+    "description" => "The Guardians embark on a mission to protect the universe and one of their own.",
+    "genre" => "Action, Adventure, Sci-Fi",
+    "release_year" => 2023,
+    "duration" => "2h 30m",
+    "image_url" => "image/GuardiansOfTheGalaxyVol3.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Gully Boy",
+    "description" => "A young man from Mumbai's slums aspires to become a rapper.",
+    "genre" => "Drama, Musical",
+    "release_year" => 2019,
+    "duration" => "2h 33m",
+    "image_url" => "image/Gully_Boy_poster.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "He Never Left",
+    "description" => "A gripping mystery about a man who vanished but left behind haunting traces.",
+    "genre" => "Mystery, Thriller",
+    "release_year" => 2022,
+    "duration" => "1h 40m",
+    "image_url" => "image/He_never_left.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "He Named Me Malala",
+    "description" => "A documentary about the inspiring life of Malala Yousafzai.",
+    "genre" => "Documentary, Biography",
+    "release_year" => 2015,
+    "duration" => "1h 28m",
+    "image_url" => "image/HeNamedMeMalala.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Hereditary",
+    "description" => "A family uncovers terrifying secrets after their matriarch passes away.",
+    "genre" => "Horror, Drama",
+    "release_year" => 2018,
+    "duration" => "2h 7m",
+    "image_url" => "image/Hereditary.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Hidden Figures",
+    "description" => "The story of three brilliant African-American women at NASA who played a key role in the space race.",
+    "genre" => "Biography, Drama, History",
+    "release_year" => 2016,
+    "duration" => "2h 7m",
+    "image_url" => "image/HiddenFigures.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "History of the World",
+    "description" => "A comedic retelling of major historical events.",
+    "genre" => "Comedy, History",
+    "release_year" => 1981,
+    "duration" => "1h 32m",
+    "image_url" => "image/HistoryOfTheWorld.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Hitpig",
+    "description" => "An animated story about a pig bounty hunter in a futuristic world.",
+    "genre" => "Animation, Comedy",
+    "release_year" => 2023,
+    "duration" => "1h 45m",
+    "image_url" => "image/hitpig.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Hocus Pocus",
+    "description" => "A group of kids accidentally awakens three witches in Salem on Halloween.",
+    "genre" => "Comedy, Family, Fantasy",
+    "release_year" => 1993,
+    "duration" => "1h 36m",
+    "image_url" => "image/HocusPocus.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "House of the Dragon",
+    "description" => "The story of House Targaryen 200 years before the events of Game of Thrones.",
+    "genre" => "Fantasy, Drama",
+    "release_year" => 2022,
+    "duration" => "1 season (so far)",
+    "image_url" => "image/HouseoftheDragon.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "I Am Not Your Negro",
+    "description" => "A documentary based on James Baldwin's unfinished manuscript, exploring race in America.",
+    "genre" => "Documentary",
+    "release_year" => 2016,
+    "duration" => "1h 33m",
+    "image_url" => "image/IAmNotYourNegro.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Inception",
+    "description" => "A thief who steals secrets through dream-sharing technology is tasked with planting an idea.",
+    "genre" => "Sci-Fi, Thriller",
+    "release_year" => 2010,
+    "duration" => "2h 28m",
+    "image_url" => "image/Inception.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Inside Job",
+    "description" => "A documentary that explores the causes of the 2008 financial crisis.",
+    "genre" => "Documentary",
+    "release_year" => 2010,
+    "duration" => "1h 48m",
+    "image_url" => "image/InsideJob.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Inside the Earth",
+    "description" => "An adventure exploring the mysteries of the Earth's core.",
+    "genre" => "Adventure, Documentary",
+    "release_year" => 2021,
+    "duration" => "1h 35m",
+    "image_url" => "image/InsideTheEarth.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Inside the Machine",
+    "description" => "An in-depth look at the inner workings of modern technology.",
+    "genre" => "Documentary, Science",
+    "release_year" => 2023,
+    "duration" => "1h 40m",
+    "image_url" => "image/InsideTheMachine.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Interstellar",
+    "description" => "A team of explorers travel through a wormhole in search of a new home for humanity.",
+    "genre" => "Sci-Fi, Adventure",
+    "release_year" => 2014,
+    "duration" => "2h 49m",
+    "image_url" => "image/Interstellar.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Into the Inferno",
+    "description" => "A documentary exploring active volcanoes around the world.",
+    "genre" => "Documentary, Adventure",
+    "release_year" => 2016,
+    "duration" => "1h 47m",
+    "image_url" => "image/IntoTheInferno.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Into the Wild",
+    "description" => "The journey of a man who leaves his possessions to live in the Alaskan wilderness.",
+    "genre" => "Biography, Adventure",
+    "release_year" => 2007,
+    "duration" => "2h 28m",
+    "image_url" => "image/IntoTheWild.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "It Follows",
+    "description" => "A young woman is pursued by a supernatural entity after a strange sexual encounter.",
+    "genre" => "Horror, Mystery",
+    "release_year" => 2014,
+    "duration" => "1h 40m",
+    "image_url" => "image/ItFollows.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=example_trailer"
+],
+[
+    "title" => "Jawan",
+    "description" => "A Bollywood action-thriller centered on themes of justice and revenge.",
+    "genre" => "Action, Drama",
+    "release_year" => 2023,
+    "duration" => "2h 45m",
+    "image_url" => "image/jawan.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=MWOlnZSnXJo&ab_channel=NetflixIndia"
+],
+[
+    "title" => "Jiro Dreams of Sushi",
+    "description" => "A documentary about Jiro Ono, a legendary sushi chef in Tokyo.",
+    "genre" => "Documentary, Biography",
+    "release_year" => 2011,
+    "duration" => "1h 21m",
+    "image_url" => "image/JiroDreamsOfSushi.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=0VB_DrsHDQ0&ab_channel=MagnoliaPictures%26MagnetReleasing"
+],
+[
+    "title" => "Julie and Julia",
+    "description" => "The story of two women finding inspiration and purpose through cooking.",
+    "genre" => "Biography, Drama, Romance",
+    "release_year" => 2009,
+    "duration" => "2h 3m",
+    "image_url" => "image/JulieAndJulia.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ozRK7VXQl-k&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "Jumanji",
+    "description" => "A magical board game unleashes jungle adventures into the real world.",
+    "genre" => "Adventure, Comedy, Family",
+    "release_year" => 1995,
+    "duration" => "1h 44m",
+    "image_url" => "image/Jumanji.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=2QKg5SZ_35I&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "Juror No. 2 (2024)",
+    "description" => "A juror must decide between doing the right thing and protecting himself when a case hits too close to home.",
+    "genre" => "Drama, Thriller",
+    "release_year" => 2024,
+    "duration" => "TBD",
+    "image_url" => "image/Juror_No._2.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=EhkkBFhW-MM&ab_channel=WarnerBros.Pictures"
+],
+[
+    "title" => "Kabhi Khushi Kabhie Gham",
+    "description" => "A Bollywood family drama about love, relationships, and values.",
+    "genre" => "Drama, Romance",
+    "release_year" => 2001,
+    "duration" => "3h 30m",
+    "image_url" => "image/k3g.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=2wn3RHVpfxE&ab_channel=SonyMusicIndiaVEVO"
+],
+[
+    "title" => "Killer Inside",
+    "description" => "A deep dive into the mind of a notorious criminal and the events that led to their downfall.",
+    "genre" => "Crime, Documentary",
+    "release_year" => 2020,
+    "duration" => "1 season",
+    "image_url" => "image/KillerInside.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=8Kr8j2YNE3Q&ab_channel=Netflix"
+],
+[
+    "title" => "Killers of the Flower Moon",
+    "description" => "An epic Western crime drama based on the Osage murders of the 1920s.",
+    "genre" => "Crime, Drama, History",
+    "release_year" => 2023,
+    "duration" => "3h 26m",
+    "image_url" => "image/killers-of-the-flower-moon.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=EP34Yoxs3FQ&ab_channel=AppleTV"
+],
+[
+    "title" => "Kung Fu Panda",
+    "description" => "A clumsy panda becomes a kung fu master and saves his village.",
+    "genre" => "Animation, Action, Comedy",
+    "release_year" => 2008,
+    "duration" => "1h 32m",
+    "image_url" => "image/KungFuPanda.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=NRc-ze7Wrxw&ab_channel=KungFuPanda"
+],
+[
+    "title" => "Kusume",
+    "description" => "A story rooted in culture, love, and resilience in the Himalayas.",
+    "genre" => "Drama",
+    "release_year" => 2021,
+    "duration" => "2h 15m",
+    "image_url" => "image/Kusume.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=er7Pb0-ToHo&ab_channel=OSRDigital"
+],
+[
+    "title" => "Lady Bird",
+    "description" => "A coming-of-age story of a teenager navigating love, family, and college.",
+    "genre" => "Drama, Comedy",
+    "release_year" => 2017,
+    "duration" => "1h 34m",
+    "image_url" => "image/LadyBird.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=cNi_HC839Wo&ab_channel=A24"
+],
+[
+    "title" => "Lagaan",
+    "description" => "In British India, villagers rise up against oppressive taxes through an epic cricket match.",
+    "genre" => "Drama, Sport",
+    "release_year" => 2001,
+    "duration" => "3h 44m",
+    "image_url" => "image/Lagaan.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Nhi4Azs2nEw&ab_channel=AmalKoshyGeorge"
+],
+[
+    "title" => "Lahure",
+    "description" => "A Nepali movie exploring the life and struggles of Gurkha soldiers.",
+    "genre" => "Drama, History",
+    "release_year" => 1995,
+    "duration" => "2h 10m",
+    "image_url" => "image/lahure.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=XkZSJKTDC0U&ab_channel=HiTechEntertainment"
+],
+[
+    "title" => "Last Christmas",
+    "description" => "A romantic comedy set during the holiday season.",
+    "genre" => "Romantic Comedy",
+    "release_year" => 2019,
+    "duration" => "1h 43m",
+    "image_url" => "image/LastChristmasTV.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=z9CEIcmWmtA&ab_channel=UniversalPictures"
+],
+[
+    "title" => "Legally Blonde",
+    "description" => "A woman proves that one can be both fashionable and smart as she takes on Harvard Law.",
+    "genre" => "Comedy",
+    "release_year" => 2001,
+    "duration" => "1h 36m",
+    "image_url" => "image/LegallyBlonde.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=vWOHwI_FgAo&ab_channel=AmazonMGMStudios"
+],
+[
+    "title" => "Life Itself",
+    "description" => "The journey of love, heartbreak, and unexpected connections across generations.",
+    "genre" => "Drama",
+    "release_year" => 2018,
+    "duration" => "1h 57m",
+    "image_url" => "image/LifeItself.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=b5kwtJkUdpA&ab_channel=PrimeMovies"
+],
+[
+    "title" => "Lo and Behold",
+    "description" => "A documentary exploring the impact of the internet on humanity.",
+    "genre" => "Documentary",
+    "release_year" => 2016,
+    "duration" => "1h 38m",
+    "image_url" => "image/LoAndBehold.jpg",
+    "trailer_url" => "https://youtube.com/watch?v=Zc1tZ8JsZvg&ab_channel=MagnoliaPictures%26MagnetReleasing"
+],
+[
+    "title" => "Loki",
+    "description" => "The adventures of the God of Mischief as he explores different timelines.",
+    "genre" => "Fantasy, Action",
+    "release_year" => 2021,
+    "duration" => "2 seasons",
+    "image_url" => "image/Loki.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=nW948Va-l10&ab_channel=MarvelEntertainment"
+],
+[
+    "title" => "Making a Murderer",
+    "description" => "A gripping documentary series exploring the controversial case of Steven Avery.",
+    "genre" => "Crime, Documentary",
+    "release_year" => 2015,
+    "duration" => "2 seasons",
+    "image_url" => "image/MakingAMurderer.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=qxgbdYaR_KQ&ab_channel=Netflix"
+],
+[
+    "title" => "Man on Wire",
+    "description" => "A thrilling documentary about Philippe Petit's daring high-wire act between the Twin Towers.",
+    "genre" => "Documentary, Drama",
+    "release_year" => 2008,
+    "duration" => "1h 34m",
+    "image_url" => "image/ManOnWire.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=EIawNRm9NWM&ab_channel=MagnoliaPictures%26MagnetReleasing"
+],
+[
+    "title" => "Matilda",
+    "description" => "The story of a young girl with extraordinary powers who outsmarts her cruel parents and headmistress.",
+    "genre" => "Family, Fantasy",
+    "release_year" => 1996,
+    "duration" => "1h 42m",
+    "image_url" => "image/Matilda.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=1UigDLytK5A&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Moana",
+    "description" => "A young Polynesian girl sets sail to save her island and discover her true destiny.",
+    "genre" => "Animation, Adventure, Family",
+    "release_year" => 2016,
+    "duration" => "1h 47m",
+    "image_url" => "image/Moana.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=LKFuXETZUsI&ab_channel=WaltDisneyAnimationStudios"
+],
+[
+    "title" => "My Octopus Teacher",
+    "description" => "A filmmaker forges a unique bond with an octopus in a South African kelp forest.",
+    "genre" => "Documentary",
+    "release_year" => 2020,
+    "duration" => "1h 25m",
+    "image_url" => "image/my-octopus-teacher.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=3s0LTDhqe5A&ab_channel=Netflix"
+],
+[
+    "title" => "Narcos",
+    "description" => "A gritty chronicle of the life and crimes of Pablo Escobar and the Medellín Cartel.",
+    "genre" => "Crime, Drama, Thriller",
+    "release_year" => 2015,
+    "duration" => "3 seasons",
+    "image_url" => "image/Narcos.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=xl8zdCY-abw&ab_channel=NetflixAsia"
+],
+[
+    "title" => "It Chapter One",
+    "description" => "A group of kids face their biggest fears when they square off against a deadly clown named Pennywise.",
+    "genre" => "Horror",
+    "release_year" => 2017,
+    "duration" => "2h 15m",
+    "image_url" => "image/ItChapterOne.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=xKJmEC5ieOk&ab_channel=WarnerBros.Pictures"
+],
+[
+    "title" => "Om Shanti Om",
+    "description" => "A reincarnation drama with love, revenge, and Bollywood glamour.",
+    "genre" => "Musical, Drama, Romance",
+    "release_year" => 2007,
+    "duration" => "2h 42m",
+    "image_url" => "image/OmShantiOm.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=9oeGoQGt7Ao&t=1s&ab_channel=RedChilliesEntertainment"
+],
+[
+    "title" => "Oppenheimer",
+    "description" => "The story of J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+    "genre" => "Biography, Drama, History",
+    "release_year" => 2023,
+    "duration" => "3h 0m",
+    "image_url" => "image/Oppenheimer.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=uYPbbksJxIg&ab_channel=UniversalPictures"
+],
+[
+    "title" => "Our Planet",
+    "description" => "A visually stunning documentary series exploring the natural world and its wonders.",
+    "genre" => "Documentary",
+    "release_year" => 2019,
+    "duration" => "1 season",
+    "image_url" => "image/OurPlanet.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=aETNYyrqNYE&ab_channel=Netflix"
+],
+[
+    "title" => "Paranormal Activity",
+    "description" => "A couple moves into a haunted house, documenting their chilling experiences.",
+    "genre" => "Horror, Mystery, Thriller",
+    "release_year" => 2007,
+    "duration" => "1h 26m",
+    "image_url" => "image/ParanormalActivity.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=F_UxLEqd074&ab_channel=watchCulturetainment"
+],
+[
+    "title" => "Parasite",
+    "description" => "A poor family schemes to become employed by a wealthy family, exposing societal inequalities.",
+    "genre" => "Thriller, Drama",
+    "release_year" => 2019,
+    "duration" => "2h 12m",
+    "image_url" => "image/Parasite.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=5xH0HfJHsaY&ab_channel=IGN"
+],
+[
+    "title" => "Past Lives",
+    "description" => "A touching exploration of love, fate, and missed connections spanning decades.",
+    "genre" => "Drama, Romance",
+    "release_year" => 2023,
+    "duration" => "1h 46m",
+    "image_url" => "image/PastLives.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=kA244xewjcI&ab_channel=A24"
+],
+[
+    "title" => "Peaky Blinders",
+    "description" => "The rise of the Shelby family in post-WWI Birmingham.",
+    "genre" => "Crime, Drama",
+    "release_year" => 2013,
+    "duration" => "6 seasons",
+    "image_url" => "image/PeakyBlinders.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Ruyl8_PT_y8&ab_channel=Netflix"
+],
+[
+    "title" => "Planet Earth",
+    "description" => "A groundbreaking series showcasing the wonders of the natural world.",
+    "genre" => "Documentary",
+    "release_year" => 2006,
+    "duration" => "1 season",
+    "image_url" => "image/PlanetEarth.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=c8aFcHFu8QM&ab_channel=BBCEarth"
+],
+[
+    "title" => "Princess Diaries",
+    "description" => "A teenager discovers she is the heir to a European kingdom.",
+    "genre" => "Comedy, Family, Romance",
+    "release_year" => 2001,
+    "duration" => "1h 55m",
+    "image_url" => "image/PrincessDiaries.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=CzcGwB7qat8&t=43s&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Pulp Fiction",
+    "description" => "Interwoven stories of crime and redemption in Los Angeles.",
+    "genre" => "Crime, Drama",
+    "release_year" => 1994,
+    "duration" => "2h 34m",
+    "image_url" => "image/PulpFiction.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=tGpTpVyI_OQ&t=34s&ab_channel=Miramax"
+],
+[
+    "title" => "Queen",
+    "description" => "A young woman embarks on a solo honeymoon trip, discovering herself along the way.",
+    "genre" => "Drama, Comedy",
+    "release_year" => 2013,
+    "duration" => "2h 26m",
+    "image_url" => "image/Queen.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=KGC6vl3lzf0&ab_channel=Viacom18Studios"
+],
+[
+    "title" => "The Queen's Gambit",
+    "description" => "A young chess prodigy navigates addiction and the challenges of her rise to fame.",
+    "genre" => "Drama",
+    "release_year" => 2020,
+    "duration" => "1 season",
+    "image_url" => "image/QueensGambit.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=oZn3qSgmLqI&ab_channel=RottenTomatoesTV"
+],
+[
+    "title" => "The Lord of the Rings: Return of the King",
+    "description" => "The final battle for Middle-earth as the Fellowship concludes their journey.",
+    "genre" => "Adventure, Fantasy",
+    "release_year" => 2003,
+    "duration" => "3h 21m",
+    "image_url" => "image/ReturnOfTheKing.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=r5X-hFf6Bwo&ab_channel=Movieclips"
+],
+[
+    "title" => "Robert Durst: The Jinx",
+    "description" => "A true crime documentary series exploring the life and crimes of real estate heir Robert Durst.",
+    "genre" => "Documentary, Crime",
+    "release_year" => 2015,
+    "duration" => "6 episodes",
+    "image_url" => "image/RobertDurstTheJinx.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=8ZabDYB7ijM&ab_channel=HBOUK"
+],
+[
+    "title" => "Rocky",
+    "description" => "A small-time boxer gets a chance to fight the heavyweight champion of the world in this inspiring sports drama.",
+    "genre" => "Drama, Sport",
+    "release_year" => 1976,
+    "duration" => "2h 2m",
+    "image_url" => "image/Rocky.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=-Hk-LYcavrw&ab_channel=AmazonMGMStudios"
+],
+[
+    "title" => "SAAT",
+    "description" => "A film exploring the struggles of a group of friends facing real-world issues.",
+    "genre" => "Drama",
+    "release_year" => 2022,
+    "duration" => "1h 50m",
+    "image_url" => "image/SAAT.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=eIN8ae2FQ8k&ab_channel=MusicNepal"
+],
+[
+    "title" => "Santaan",
+    "description" => "A family drama revolving around parental expectations and personal choices.",
+    "genre" => "Drama, Family",
+    "release_year" => 1996,
+    "duration" => "2h 12m",
+    "image_url" => "image/Santaan.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=zyYjUrhbVLw&ab_channel=BudhaSubbaDigital"
+],
+[
+    "title" => "Schindler's List",
+    "description" => "A gripping drama about a businessman who saves Jewish refugees during the Holocaust.",
+    "genre" => "Biography, Drama, History",
+    "release_year" => 1993,
+    "duration" => "3h 15m",
+    "image_url" => "image/SchindlersList.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=gG22XNhtnoY&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Se7en",
+    "description" => "Two detectives hunt a serial killer who uses the seven deadly sins as his modus operandi.",
+    "genre" => "Crime, Thriller, Mystery",
+    "release_year" => 1995,
+    "duration" => "2h 7m",
+    "image_url" => "image/Se7en.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=znmZoVkCjpI&t=6s&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Search",
+    "description" => "A young woman tracks her missing husband through his digital footprint.",
+    "genre" => "Thriller, Mystery",
+    "release_year" => 2018,
+    "duration" => "1h 42m",
+    "image_url" => "image/Search.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=vRzSYp9JJE4&ab_channel=VikiGlobalTV"
+],
+[
+    "title" => "Seaspiracy",
+    "description" => "A documentary exploring the environmental impact of fishing practices.",
+    "genre" => "Documentary, Crime",
+    "release_year" => 2021,
+    "duration" => "1h 30m",
+    "image_url" => "image/Seaspiracy.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=1Q5CXN7soQg&ab_channel=Netflix"
+],
+[
+    "title" => "Secrets of the Universe",
+    "description" => "An exploration of the mysteries of space and the universe.",
+    "genre" => "Documentary",
+    "release_year" => 2019,
+    "duration" => "1 season",
+    "image_url" => "image/SecretsOfTheUniverse.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=q4f6f4od1ZM&ab_channel=PerimeterInstituteforTheoreticalPhysics"
+],
+[
+    "title" => "Seinfeld",
+    "description" => "A comedy series following the misadventures of a stand-up comedian and his quirky friends.",
+    "genre" => "Comedy",
+    "release_year" => 1989,
+    "duration" => "9 seasons",
+    "image_url" => "image/Seinfeld.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=hQXKyIG_NS4&ab_channel=Netflix"
+],
+[
+    "title" => "Seventy-Two Hours",
+    "description" => "A gripping documentary series about high-stakes rescue missions in critical situations.",
+    "genre" => "Documentary, Action",
+    "release_year" => 2020,
+    "duration" => "1 season",
+    "image_url" => "image/SeventyTwoHours.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=O1O73TwZKeU&ab_channel=BrainstormMedia"
+],
+[
+    "title" => "Shawshank Redemption",
+    "description" => "A banker’s time in prison and his struggle to maintain hope and human dignity.",
+    "genre" => "Drama",
+    "release_year" => 1994,
+    "duration" => "2h 22m",
+    "image_url" => "image/ShawshankRedemption.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=PLl99DlL6b4&ab_channel=WarnerBros.Entertainment"
+],
+[
+    "title" => "Sholay",
+    "description" => "A classic Indian film about the friendship between a bandit and a police officer.",
+    "genre" => "Action, Drama",
+    "release_year" => 1975,
+    "duration" => "3h 10m",
+    "image_url" => "image/Sholay.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=u2pJU82Xj9M&ab_channel=PenMovies"
+],
+[
+    "title" => "Shutter Island",
+    "description" => "A U.S. Marshal investigates the disappearance of a murderess from a mental institution.",
+    "genre" => "Mystery, Thriller",
+    "release_year" => 2010,
+    "duration" => "2h 18m",
+    "image_url" => "image/ShutterIsland.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=v8yrZSkKxTA&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "Sleepless in Seattle",
+    "description" => "A woman listens to a man’s emotional appeal on a radio show, and is moved to find him.",
+    "genre" => "Romance, Comedy",
+    "release_year" => 1993,
+    "duration" => "1h 45m",
+    "image_url" => "image/SleeplessInSeattle.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ahI9LaOGYcE&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "The Social Network",
+    "description" => "The story of the founding of Facebook, from the perspective of its creator.",
+    "genre" => "Biography, Drama",
+    "release_year" => 2010,
+    "duration" => "2h 0m",
+    "image_url" => "image/Social.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=lB95KLmpLR4&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "Spider-Man: Across the Spider-Verse",
+    "description" => "Miles Morales continues his journey through the Spider-Verse, facing new challenges.",
+    "genre" => "Action, Animation, Adventure",
+    "release_year" => 2023,
+    "duration" => "2h 20m",
+    "image_url" => "image/SpiderManAcrossTheSpiderVerse.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=cqGjhVJWtEg&t=48s&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "Spirited",
+    "description" => "A musical take on the Charles Dickens classic 'A Christmas Carol'.",
+    "genre" => "Musical, Comedy, Fantasy",
+    "release_year" => 2022,
+    "duration" => "2h 8m",
+    "image_url" => "image/Spirited.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=tnAJntI3NNs&ab_channel=AppleTV"
+],
+[
+    "title" => "Spider-Man",
+    "description" => "Peter Parker, a high school student, acquires superpowers and faces off against a criminal.",
+    "genre" => "Action, Adventure, Fantasy",
+    "release_year" => 2002,
+    "duration" => "2h 1m",
+    "image_url" => "image/SPMAN.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=t06RUxPbp_c&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "Squid Game",
+    "description" => "A group of people with financial struggles compete in children’s games with a deadly twist.",
+    "genre" => "Action, Drama, Thriller",
+    "release_year" => 2021,
+    "duration" => "1 season",
+    "image_url" => "image/SquidGame.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Ed1sGgHUo88&ab_channel=Netflix"
+],
+[
+    "title" => "Startup.com",
+    "description" => "A documentary about the dot-com boom and the rise and fall of a high-tech startup.",
+    "genre" => "Documentary",
+    "release_year" => 2001,
+    "duration" => "1h 32m",
+    "image_url" => "image/Startup.com.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Pjk-WmtNs3g&ab_channel=PennebakerHegedus"
+],
+[
+    "title" => "Stranger Things",
+    "description" => "A group of kids uncover a series of supernatural mysteries in their small town.",
+    "genre" => "Drama, Fantasy, Horror",
+    "release_year" => 2016,
+    "duration" => "4 seasons",
+    "image_url" => "image/StrangerThings.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=a3thyAnShck&ab_channel=RottenTomatoesTV"
+],
+[
+    "title" => "Stranger Things S4",
+    "description" => "The fight against the mind flayer continues as the kids are drawn deeper into the Upside Down.",
+    "genre" => "Drama, Fantasy, Horror",
+    "release_year" => 2022,
+    "duration" => "7 episodes",
+    "image_url" => "image/StrangerThingsS4.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=a3thyAnShck&ab_channel=RottenTomatoesTV"
+],
+[
+    "title" => "Summer of Soul",
+    "description" => "A documentary on the 1969 Harlem Cultural Festival and its impact on music and culture.",
+    "genre" => "Documentary, Music",
+    "release_year" => 2021,
+    "duration" => "1h 57m",
+    "image_url" => "image/SummerOfSoul.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=slFiJpAxZyQ&ab_channel=SearchlightPictures"
+],
+[
+    "title" => "Sun",
+    "description" => "A visual journey through the wonders of our star.",
+    "genre" => "Documentary",
+    "release_year" => 2023,
+    "duration" => "1h 45m",
+    "image_url" => "image/Sun.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=y5-FEtJTg44&ab_channel=SingaporeInternationalFilmFestival"
+],
+[
+    "title" => "Techno Crisis",
+    "description" => "A gripping thriller exploring the consequences of a global technological collapse.",
+    "genre" => "Thriller, Sci-Fi",
+    "release_year" => 2022,
+    "duration" => "1h 35m",
+    "image_url" => "image/TechnoCrisis.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=Bda4jp7EXQ0&ab_channel=Crysis"
+],
+[
+    "title" => "Terms and Conditions",
+    "description" => "A comedy series exploring the humorous side of workplace culture and digital rights.",
+    "genre" => "Comedy, Drama",
+    "release_year" => 2023,
+    "duration" => "1 season",
+    "image_url" => "image/TermsAndConditions.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=MzJ-VStV30g&ab_channel=SebLowe"
+],
+[
+    "title" => "Thanksgiving",
+    "description" => "A heartfelt drama set against the backdrop of an annual Thanksgiving family gathering.",
+    "genre" => "Drama",
+    "release_year" => 2022,
+    "duration" => "2h 15m",
+    "image_url" => "image/Thanksgiving.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=KbU50SdL8zA&ab_channel=SonyPicturesEntertainment"
+],
+[
+    "title" => "The Boy in the Striped Pajamas",
+    "description" => "The tragic story of two young boys who form a bond despite the barriers of war and prejudice.",
+    "genre" => "Drama, War",
+    "release_year" => 2008,
+    "duration" => "1h 34m",
+    "image_url" => "image/TheBoyintheStripedPajamas.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=uwysOfnX2Qg&t=30s&ab_channel=TheMoviePlanet"
+],
+[
+    "title" => "The Madness",
+    "description" => "A psychological thriller exploring a writer’s descent into madness.",
+    "genre" => "Thriller, Mystery",
+    "release_year" => 2023,
+    "duration" => "1h 45m",
+    "image_url" => "image/TheMadness.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=m8rpXHCa8kE&ab_channel=Netflix"
+],
+[
+    "title" => "The Pursuit of Happyness",
+    "description" => "A true story about a struggling single father’s attempt to build a better life for his son.",
+    "genre" => "Biography, Drama",
+    "release_year" => 2006,
+    "duration" => "1h 57m",
+    "image_url" => "image/ThePursuitofHappyness.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=DMOBlEcRuw8&ab_channel=RottenTomatoesClassicTrailers"
+],
+[
+    "title" => "The Shawshank Redemption",
+    "description" => "A banker’s time in prison and his struggle to maintain hope and human dignity.",
+    "genre" => "Drama",
+    "release_year" => 1994,
+    "duration" => "2h 22m",
+    "image_url" => "image/TheShawshankRedemption.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=PLl99DlL6b4&ab_channel=WarnerBros.Entertainment"
+],
+[
+    "title" => "The Boys",
+    "description" => "A group of vigilantes fight against superpowered individuals who abuse their powers.",
+    "genre" => "Action, Comedy, Drama",
+    "release_year" => 2019,
+    "duration" => "4 seasons",
+    "image_url" => "image/TheBoys.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=M1bhOaLV4FU&ab_channel=AmazonPrimeVideoUK%26IE"
+],
+[
+    "title" => "The Last of Us",
+    "description" => "A post-apocalyptic tale of survival and redemption following a pandemic.",
+    "genre" => "Action, Adventure, Drama",
+    "release_year" => 2023,
+    "duration" => "1 season",
+    "image_url" => "image/TheLastofUs.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=uLtkt8BonwM&ab_channel=Max"
+],
+[
+    "title" => "The Morning Show",
+    "description" => "An inside look at the lives of people who work in morning television.",
+    "genre" => "Drama, Comedy",
+    "release_year" => 2019,
+    "duration" => "3 seasons",
+    "image_url" => "image/TheMorningShow.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=vPrtuy_4lHM&ab_channel=RottenTomatoesTV"
+],
+[
+    "title" => "The Umbrella Academy",
+    "description" => "A dysfunctional family of adopted superheroes reunite to solve the mystery of their father’s death.",
+    "genre" => "Action, Adventure, Fantasy",
+    "release_year" => 2019,
+    "duration" => "3 seasons",
+    "image_url" => "image/TheUmbrellaAcademy.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=0DAmWHxeoKw&ab_channel=Netflix"
+],
+[
+    "title" => "The Witcher",
+    "description" => "A monster hunter navigates a world of political intrigue and magical beasts.",
+    "genre" => "Fantasy, Action, Adventure",
+    "release_year" => 2019,
+    "duration" => "3 seasons",
+    "image_url" => "image/TheWitcher.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=ndl1W4ltcmg&ab_channel=Netflix"
+],
+[
+    "title" => "The World at War",
+    "description" => "A comprehensive documentary series detailing World War II from multiple perspectives.",
+    "genre" => "Documentary, War",
+    "release_year" => 1973,
+    "duration" => "26 episodes",
+    "image_url" => "image/TheWorldatWar.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=0b4g4ZZNC1E&list=PLYxy4la9w2tfotW1Xs-7oICGflf4dJtj5&ab_channel=ShubhamSharda"
+],
+[
+    "title" => "The Babadook",
+    "description" => "A single mother and her son face an unknown entity after the father’s death.",
+    "genre" => "Horror, Thriller",
+    "release_year" => 2014,
+    "duration" => "1h 33m",
+    "image_url" => "image/TheBabadook.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=k5WQZzDRVtw&ab_channel=RottenTomatoesTrailers"
+],
+[
+    "title" => "The Bear",
+    "description" => "A young chef returns home to Chicago to run his family’s sandwich shop.",
+    "genre" => "Drama, Comedy",
+    "release_year" => 2022,
+    "duration" => "1 season",
+    "image_url" => "image/TheBear.jpg",
+    "trailer_url" => "https://www.youtube.com/watch?v=gBmkI4jlaIo&ab_channel=RottenTomatoesTV"
+]
+
+];
+    
+

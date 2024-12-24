@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-color: #111111;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  .bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200vh;
+    background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+    background-repeat: repeat;
+    animation: bg-animation .2s infinite;
+    opacity: .9;
+    visibility: visible;
+  }
+  
+  @keyframes bg-animation {
+      0% { transform: translate(0,0) }
+      10% { transform: translate(-5%,-5%) }
+      20% { transform: translate(-10%,5%) }
+      30% { transform: translate(5%,-10%) }
+      40% { transform: translate(-5%,15%) }
+      50% { transform: translate(-10%,5%) }
+      60% { transform: translate(15%,0) }
+      70% { transform: translate(0,10%) }
+      80% { transform: translate(-15%,0) }
+      90% { transform: translate(10%,5%) }
+      100% { transform: translate(5%,0) }
+  }
+
+/* Centering the content */
+.center-container {
+    display: flex;
+    flex-direction: column; /* Stacks the headings vertically */
+    justify-content: center; /* Centers them vertically */
+    align-items: center; /* Centers them horizontally */
+    text-align: center; /* Ensures text is centered */
+    height: 150px; /* Makes the container take full viewport height */
+}
+
+/* Styling the h1 and h3 */
+h1 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #dcdcdc;
+    margin-bottom: 8px;
+}
+
+.container{
+    background:#fff;
+    width:450px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+    box-shadow:0 20px 35px rgba(0,0,1,0.9);
+}
+form{
+    margin:0 2rem;
+}
+.form-title{
+    font-size:1.5rem;
+    font-weight:bold;
+    text-align:center;
+    padding:1.3rem;
+    margin-bottom:0.4rem;
+}
+input{
+    color:inherit;
+    width:100%;
+    background-color:transparent;
+    border:none;
+    border-bottom:1px solid #757575;
+    padding-left:1.5rem;
+    font-size:15px;
+}
+.input-group{
+    padding:1% 0;
+    position:relative;
+
+}
+.input-group i{
+    position:absolute;
+    color:black;
+}
+input:focus{
+    background-color: transparent;
+    outline:transparent;
+    border-bottom:2px solid hsl(327,90%,28%);
+}
+input::placeholder{
+    color:transparent;
+}
+label{
+    color:#757575;
+    position:relative;
+    left:1.2em;
+    top:-1.3em;
+    cursor:auto;
+    transition:0.3s ease all;
+}
+input:focus~label,input:not(:placeholder-shown)~label{
+    top:-3em;
+    color:hsl(327,90%,28%);
+    font-size:15px;
+}
+.recover{
+    text-align:right;
+    font-size:1rem;
+    margin-bottom:1rem;
+
+}
+.recover a{
+    text-decoration:none;
+    color:rgb(125,125,235);
+}
+.recover a:hover{
+    color:blue;
+    text-decoration:underline;
+}
+
+/* Default button styling */
+.btn {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background: black; /* Default black color */
+    color: white; /* White text */
+    cursor: pointer; /* Pointer cursor */
+    opacity: 0.8; /* Slight transparency by default */
+    transition: opacity 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+
+.btn:hover {
+    opacity: 1; 
+    transform: scale(1.05);
+}
+
+#signInButton, #signUpButton {
+    font-size: 1.1rem;
+    padding: 8px 0;
+    color: black; /* Black background */
+    cursor: pointer; /* Pointer cursor */
+    opacity: 0.8; /* Slight transparency by default */
+    transition: opacity 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Hover effect for <button> */
+#signInButton:hover, #signUpButton:hover {
+    opacity: 1; /* Full opacity on hover */
+    transform: scale(1.05);
+   
+}
+/* Styling for the Recover Password link */
+.recover a {
+    font-size: 1rem;
+    color: black; /* Default black color */
+    cursor: pointer; /* Pointer cursor */
+    opacity: 0.8; /* Slight transparency by default */
+    transition: opacity 0.3s, transform 0.3s; /* Smooth transitions */
+    text-decoration: none; /* Remove underline by default */
+}
+
+/* Hover effect for the Recover Password link */
+.recover a:hover {
+    opacity: 1; /* Full opacity on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+    text-decoration: underline; /* Underline on hover */
+    color: #333; /* Change color slightly on hover (you can adjust this) */
+}
+
+.or{
+    font-size:1.1rem;
+    margin-top:0.5rem;
+    text-align:center;
+}
+.icons{
+    text-align:center;
+}
+.icons i{
+    color:rgb(16, 16, 18);
+    padding:0.8rem 1.5rem;
+    border-radius:10px;
+    font-size:1.5rem;
+    cursor:pointer;
+    border:2px solid #dfe9f5;
+    margin:0 15px;
+    transition:1s;
+}
+.icons i:hover{
+    background:#07001f;
+    font-size:1.6rem;
+    border:2px solid rgb(125,125,235);
+}
+.links{
+    display:flex;
+    justify-content:space-around;
+    padding:0 4rem;
+    margin-top:0.9rem;
+    font-weight:bold;
+}
+button{
+    color:rgb(26, 26, 30);
+    border:none;
+    background-color:transparent;
+    font-size:1rem;
+    font-weight:bold;
+}
+button:hover{
+    text-decoration:underline;
+    color:rgb(29, 29, 32);
+}

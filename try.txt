@@ -1,0 +1,267 @@
+<?php
+session_start();
+include("connect.php");
+
+// Function to fetch movies by genre
+function fetch_movies_by_genre($genre) {
+    global $conn; // Access the global database connection
+    $sql = "SELECT * FROM home WHERE genre = '$genre'"; 
+    $result = mysqli_query($conn, $sql);
+    return $result;
+  }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="faviconn.png" type="image/png">
+  <link rel="stylesheet" href="mycss.css">
+  <title>Theatrick: Your Ultimate Gateway to Films</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="navbar">
+    <a href="homepage.php" id="logo">
+        <img src="image/logo-color.png" alt="Website Logo">
+    </a>
+
+    <div id="searchContainer" class="search-container" style="display: none;">
+        <input type="text" placeholder="Search.." id="Search" name="Search">
+    </div>
+
+    <button class="nav-button" id="searchButton">
+        <img src="image/search.png" alt="Search">
+    </button>
+
+    <button class="nav-button" id="voiceButton">
+        <img src="image/microphone-black-shape.png" alt="Voice Search">
+    </button>
+
+    <button class="nav-button" id="Notification">
+        <img src="image\notification.png" alt="Notification">
+    </button>
+
+    <button class="nav-button" id="profile">
+        <img src="image\profile.jpg" alt="profile">
+    </button>
+    <div class="nav-links">
+        <a href="homepage.php">Home</a>
+        <a href="movies.php">Movies</a>
+        <a href="Series.php">Series</a>
+        <a href="documentaries.php">Documentaries</a>
+        <a href="watchlist.php">My Watchlist</a>
+    </div>
+  
+    <div class="user-controls">
+        <?php 
+        if (isset($_SESSION['email'])) {
+            $email = $_SESSION['email'];
+            $query = mysqli_query($conn, "SELECT firstName, lastName FROM users WHERE email='$email'");
+            if ($query && mysqli_num_rows($query) > 0) {
+                $row = mysqli_fetch_assoc($query);
+                echo "<span class='welcome-message'>Hello, " . $row['firstName'] . " " . $row['lastName'] . "</span>";
+            } else {
+                echo "<span class='welcome-message'>Error: Unable to fetch user data.</span>";
+            }
+        } else {
+            echo "<span class='welcome-message'>Welcome, Guest!</span>";
+        }
+        ?>
+        <a href="logout.php" class="logout-button">Logout</a>
+    </div>
+</div>
+
+<div class="trending-slideshow">
+    <div class="trending-banner">
+      <h2 id="trending-text">Today's Trending Hit on Theatrick: Most Searched Movie!</h2>
+    </div>
+  </div>
+  <div class="slideshow-container">
+    <div class="slide">
+        <div class="movie-poster">
+            <img src="image\killers-of-the-flower-moon.jpeg" alt="Killers of the Flower Moon" class="poster-image">
+            <a href="https://www.youtube.com/watch?v=EP34Yoxs3FQ&ab_channel=AppleTV" target="_blank" class="play-button">▶</a>
+            <div class="movie-info">
+                <h3 class="movie-title">Killers of the Flower Moon</h3>
+                <p class="movie-description">2023 ‧ Crime/Drama ‧ 3h 26m</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide">
+        <div class="movie-poster">
+            <img src="image\jawan.png" alt="Jawan" class="poster-image">
+            <a href="https://www.youtube.com/watch?v=MWOlnZSnXJo&ab_channel=NetflixIndia" target="_blank" class="play-button">▶</a>
+            <div class="movie-info">
+                <h3 class="movie-title">Jawan</h3>
+                <p class="movie-description">2023 ‧ Action/Thriller ‧ 2h 49m</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide">
+  <div class="movie-poster">
+    <img src="image\oppen.avif" alt="Oppenheimer" class="poster-image">
+    <a href="https://www.youtube.com/watch?v=uYPbbksJxIg&ab_channel=UniversalPictures" target="_blank" class="play-button">▶</a>
+    <div class="movie-info">
+      <h3 class="movie-title">Oppenheimer</h3>
+      <p class="movie-description">2023 ‧ Biography/Drama ‧ 3h</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="movie-poster">
+    <img src="image\rocky.jpg" alt="Rocky Aur Rani Ki Prem Kahani" class="poster-image">
+    <a href="https://www.youtube.com/watch?v=6mdxy3zohEk&ab_channel=DharmaProductions" target="_blank" class="play-button">▶</a>
+    <div class="movie-info">
+      <h3 class="movie-title">Rocky Aur Rani Ki Prem Kahani</h3>
+      <p class="movie-description">2023 ‧ Romance/Comedy ‧ 2h 48m</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="movie-poster">
+    <img src="image\past_lives.jpg" alt="Past Lives" class="poster-image">
+    <a href="https://www.youtube.com/watch?v=kA244xewjcI&ab_channel=A24" target="_blank" class="play-button">▶</a>
+    <div class="movie-info">
+      <h3 class="movie-title">Past Lives</h3>
+      <p class="movie-description">2023 ‧ Drama/Romance ‧ 1h 46m</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="movie-poster">
+    <img src="image\drishyam.avif" alt="Drishyam 2" class="poster-image">
+    <a href="https://www.youtube.com/watch?v=cxA7xGiL2J4" target="_blank" class="play-button">▶</a>
+    <div class="movie-info">
+      <h3 class="movie-title">Drishyam 2</h3>
+      <p class="movie-description">2022 ‧ Thriller/Crime ‧ 2h 20m</p>
+    </div>
+  </div>
+</div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<div class="dot-container">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span>   
+</div>
+
+<h2 class="Top-picks_header">Trending Now</h2>
+<div class="slider-container">
+  <section class="slider">
+    <?php
+    // Fetch trending movies
+    $movies_trending = fetch_movies_by_genre('Trending');
+
+    if (mysqli_num_rows($movies_trending) > 0) {
+      while ($movie = mysqli_fetch_assoc($movies_trending)) {
+        $image_path = "image/" . $movie['image_url'];
+
+        // Basic error handling for image path
+        if (!file_exists($image_path)) {
+          $image_path = "image/default_image.jpg"; // Use a default image
+        }
+
+        echo '<div class="movies-poster">
+              <img src="' . $image_path . '" alt="' . $movie['title'] . '" class="poster-image">
+              <a href="' . $movie['trailer_url'] . '" target="_blank" class="plays-button">▶</a>
+              <div class="movies-info">
+                <h3 class="movies-title">' . $movie['title'] . '</h3>
+                <p class="movies-description">' . $movie['release_year'] . ' ‧ ' . $movie['genre'] . ' ‧ ' . $movie['duration'] . '</p>
+              </div>
+            </div>';
+      }
+    } else {
+      echo '<p>No movies found for Trending category.</p>';
+    }
+    ?>
+  </section>
+</div>
+
+
+<h2 class="Top-picks_header">Upcoming Releases</h2>
+<div class="slider-container">
+  
+  <!-- Slider Section -->
+  <section class="slider">
+    <?php
+    $movies_upcoming = fetch_movies_by_genre('Upcoming');
+    while ($movie = mysqli_fetch_assoc($movies_upcoming)) {
+        echo '<div class="movies-poster">
+                <img src="image/' . $movie['image_url'] . '" alt="' . $movie['title'] . '" class="poster-image">
+                <a href="' . $movie['trailer_url'] . '" target="_blank" class="plays-button">▶</a>
+                <div class="movies-info">
+                    <h3 class="movies-title">' . $movie['title'] . '</h3>
+                    <p class="movies-description">' . $movie['release_year'] . ' ‧ ' . $movie['genre'] . ' ‧ ' . $movie['duration'] . '</p>
+                </div>
+              </div>';
+    }
+    ?>
+  </section>
+</div>
+
+<h2 class="Top-picks_header">Theatrick's Favourite</h2>
+<div class="slider-container">
+  <img src="image/back.png" id="backBtn">
+  <!-- Slider Section -->
+  <section class="slider">
+    <?php
+    $movies_favourite = fetch_movies_by_genre('Favourite');
+    while ($movie = mysqli_fetch_assoc($movies_favourite)) {
+        echo '<div class="movies-poster">
+                <img src="image/' . $movie['image_url'] . '" alt="' . $movie['title'] . '" class="poster-image">
+                <a href="' . $movie['trailer_url'] . '" target="_blank" class="plays-button">▶</a>
+                <div class="movies-info">
+                    <h3 class="movies-title">' . $movie['title'] . '</h3>
+                    <p class="movies-description">' . $movie['release_year'] . ' ‧ ' . $movie['genre'] . ' ‧ ' . $movie['duration'] . '</p>
+                </div>
+              </div>';
+    }
+    ?>
+  </section>
+</div>
+
+<h2 class="Top-picks_header">Horror</h2>
+<div class="slider-container">
+  <img src="image/back.png" id="backBtn">
+  <!-- Slider Section -->
+  <section class="slider">
+    <?php
+    $movies_horror = fetch_movies_by_genre('Horror');
+    while ($movie = mysqli_fetch_assoc($movies_horror)) {
+        echo '<div class="movies-poster">
+                <img src="image/' . $movie['image_url'] . '" alt="' . $movie['title'] . '" class="poster-image">
+                <a href="' . $movie['trailer_url'] . '" target="_blank" class="plays-button">▶</a>
+                <div class="movies-info">
+                    <h3 class="movies-title">' . $movie['title'] . '</h3>
+                    <p class="movies-description">' . $movie['release_year'] . ' ‧ ' . $movie['genre'] . ' ‧ ' . $movie['duration'] . '</p>
+                </div>
+              </div>';
+    }
+    ?>
+  </section>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 Your Movie Website. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
